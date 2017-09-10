@@ -31,18 +31,20 @@ Bamazon.prototype.listProducts = function(mode, connection, nextFunc){
 				deptName: res[i].dept_name
 			};
 			that.productList.push(product);
-			console.log("Product ID: " + res[i].prod_id);
-			console.log("Product Name: " + res[i].prod_name);
-			console.log("Description: " + res[i].prod_descr);
-			console.log("Price: $" + res[i].retail_price);
-			if(mode != "customer"){
-				console.log("------");
-				console.log("Wholesale Price: $" + res[i].wsp);
-				console.log("Quantity in Stock: " + res[i].stock_qty);
-				console.log("Total Number Sold: " + res[i].num_sold);
-				console.log("Department: " + res[i].dept_name); 
+			if (mode != "low"){
+				logMainAttributes(res[i]);
+				if(mode != "customer"){
+					console.log("------");
+					logAdditionalAttributes(res[i]);
+				}
+				console.log("-----------------------------");
 			}
-			console.log("-----------------------------");
+			else if (res[i].stock_qty <= 5){
+				logMainAttributes(res[i]);
+				console.log("------");
+				logAdditionalAttributes(res[i]);
+				console.log("-----------------------------");
+			}
 		}
 		nextFunc();
 	});
@@ -59,6 +61,20 @@ Bamazon.prototype.updateProduct = function(updateObj, connection, nextFunc){
 		console.log("Complete!");
 		nextFunc();
 	});
+};
+
+var logMainAttributes = function(product){
+	console.log("Product ID: " + product.prod_id);
+	console.log("Product Name: " + product.prod_name);
+	console.log("Description: " + product.prod_descr);
+	console.log("Price: $" + product.retail_price);	
+};
+
+var logAdditionalAttributes = function(product){
+	console.log("Wholesale Price: $" + product.wsp);
+	console.log("Quantity in Stock: " + product.stock_qty);
+	console.log("Total Number Sold: " + product.num_sold);
+	console.log("Department: " + product.dept_name); 
 };
 
 module.exports = Bamazon;

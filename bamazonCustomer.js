@@ -85,13 +85,16 @@ var buyProduct = function(){
 				return;
 			}else {	
 				var newQuant = {productId: prod, field: "stock_qty", value: bamazon.productList[prodIndex].stockQty - quant};
+				var newSold = {productId: prod, field: "num_sold", value: bamazon.productList[prodIndex].numSold + quant};
 				shoppingCart.push({
 					productId: bamazon.productList[prodIndex].prodId,
 					prodName: bamazon.productList[prodIndex].prodName,
 					qtyPurchased: quant,
 					retailPrice: bamazon.productList[prodIndex].retailPrice
 				});
-				bamazon.updateProduct(newQuant, connection, mainMenu);
+				bamazon.updateProduct(newQuant, connection, function(){
+					bamazon.updateProduct(newSold, connection, mainMenu);		
+				});
 			}
 		});
 	});
