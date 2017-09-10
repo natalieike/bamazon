@@ -85,11 +85,33 @@ var buyProduct = function(){
 				return;
 			}else {	
 				var newQuant = {productId: prod, field: "stock_qty", value: bamazon.productList[prodIndex].stockQty - quant};
-				shoppingCart.push(bamazon.productList[prodIndex]);
+				shoppingCart.push({
+					productId: bamazon.productList[prodIndex].prodId,
+					prodName: bamazon.productList[prodIndex].prodName,
+					qtyPurchased: quant,
+					retailPrice: bamazon.productList[prodIndex].retailPrice
+				});
 				bamazon.updateProduct(newQuant, connection, mainMenu);
 			}
 		});
 	});
+};
+
+var checkout = function(){
+	var total = 0;
+	if(shoppingCart.length < 1){
+		console.log("You don't have anything in your cart yet.");
+		mainMenu();
+		return;
+	}
+	console.log("You are purchasing the following items: ");
+	for (var i = 0; i < shoppingCart.length; i++){
+		var prodTotal = shoppingCart[i].retailPrice * shoppingCart[i].qtyPurchased;
+		total = total + prodTotal;
+		console.log(shoppingCart[i].prodName + " -- Qty: " + shoppingCart[i].qtyPurchased);
+	}
+	console.log("Your total is: $" + total);
+	mainMenu();
 };
 
 //Initialize SQL connection and call Main Menu to start
