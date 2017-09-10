@@ -39,7 +39,17 @@ VALUES ("Samsung TV", 1, "42in TV", 400.00, 600.00, 10),
 		("Tent", 5, "For Basic Camping", 100.00, 200.00, 3),
 		("Sports Ball", 5, "For Sporty Ball People", 2.00, 15.00, 35);
 		
-select products.prod_name, products.prod_descr, products.retail_price, depts.dept_name
+INSERT INTO depts (dept_name, overhead_costs)
+VALUES ("Pets", 1000),
+		("Outdoor Products", 3500);		
+		
+INSERT INTO products (prod_name, dept_id, prod_descr, wsp, retail_price, stock_qty)
+VALUES ("Cat Tree", 6, "Cat Jungle", 10.00, 45.00, 35),
+		("Dog Leash", 6, "How Dog walks you", 3.00, 15.00, 50),
+		("Jungle Gym", 7, "Broken Arm waiting to happen", 200.00, 400.00, 6);		
+		
+select products.prod_id, products.prod_name, products.prod_descr, products.retail_price, products.stock_qty, depts.dept_name
 from products
 left join depts on products.dept_id = depts.dept_id
+order by products.prod_id
 		
