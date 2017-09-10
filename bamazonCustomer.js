@@ -2,7 +2,7 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 //Required custom Module - shared methods for all bamazon scripts
-var bamazon = require("./bamazon.js");
+var Bamazon = require("./bamazon.js");
 
 //Shopping Cart - array of objects to hold items purchased
 var shoppingCart = [];
@@ -49,20 +49,11 @@ var mainMenu = function(){
 
 //Lists products in Customer format (ID, Name, Description, Retail Price)
 var listProdsCustomer = function(){
-	connection.query("SELECT prod_id, prod_name, prod_descr, retail_price FROM products", function(err, res){
-		if(err){
-			return console.log(err);
-		}
-		for(var i = 0; i < res.length; i++){
-			console.log("Product ID: " + res[i].prod_id);
-			console.log("Product Name: " + res[i].prod_name);
-			console.log("Description: " + res[i].prod_descr);
-			console.log("Price: $" + res[i].retail_price);
-			console.log("-----------------------------");
-		}
-		mainMenu();
-	});
+	var bamazon = new Bamazon();
+	bamazon.listProducts("customer", connection, mainMenu);
 };
+
+//
 
 //Initialize SQL connection and call Main Menu to start
 connection.connect(function(err){
