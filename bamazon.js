@@ -11,10 +11,16 @@ function Bamazon(){
 	this.deptList = [];
 };
 
-//Pushes products to productList for further reference, outputs product details.
+//Pushes products to productList for further reference, outputs product details, depending on Mode.
 Bamazon.prototype.listProducts = function(mode, connection, nextFunc){
 	var that = this;
-	connection.query("SELECT * FROM products LEFT JOIN depts on products.dept_id = depts.dept_id ORDER BY products.prod_id", function(err, res){
+	var orderBy = [];
+	if(mode != "supervisor"){
+		orderBy.push("products.prod_id");
+	}else{
+		orderBy.push("products.dept_id");
+	}
+	connection.query("SELECT * FROM products LEFT JOIN depts on products.dept_id = depts.dept_id ORDER BY ??",orderBy, function(err, res){
 		if(err){
 			connection.end();
 			return console.log(err);
@@ -68,6 +74,10 @@ Bamazon.prototype.getDepartments = function(connection, nextFunc){
 	var that = this;
 	this.deptList = [];
 	connection.query("SELECT * from depts ORDER BY dept_id", function(err, res){
+		if(err){
+			connection.end();
+			return console.log(err);
+		}
 		for (var i = 0; i < res.length; i++){
 			var dept = {
 				deptId: res[i].dept_id,

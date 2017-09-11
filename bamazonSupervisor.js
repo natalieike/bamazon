@@ -63,10 +63,49 @@ var deptSalesReport = function(){
 					table[tableIndex][4] = productSale - table[tableIndex][2];
 				}
 			};
+			for(var i = 0; i < bamazon.deptList.length; i++){
+				var tableIndex = table.findIndex(x => x[1] === bamazon.deptList[i].deptName);
+				if(tableIndex < 0){
+					var profit = 0 - bamazon.deptList[i].deptOverhead;
+					table.push([bamazon.deptList[i].deptId, bamazon.deptList[i].deptName, bamazon.deptList[i].deptOverhead, 0, profit]);					
+				}
+			};
 			console.log(table.toString());
 			mainMenu();
 		});
 	});	
+};
+
+//Add new deptartment to database
+var addDept = function(){
+	inquirer.prompt([
+  	{
+	    type: "input",
+    	message: "Enter a Department Name",
+   		name: "deptName"
+ 	  },
+	  {
+   		type: "input",
+   		message: "Enter the Department's overhead costs in $",
+ 	  	name: "deptOverhead"
+	}]).then(function(res){
+	  if(isNaN(res.deptOverhead)){
+	  	console.log("Deptartment Overhead needs to be a number.  Please try again.");
+	 		mainMenu();
+	 		return;
+  	}
+	  connection.query("INSERT INTO depts SET ?", {
+	 		dept_name: res.deptName,
+	 		overhead_costs: res.deptOverhead
+  	}, function(err, res){
+	  	if(err){
+	 			connection.end();
+	 			return console.log(err);
+  		}
+	  	console.log("Department Added!");
+	 		mainMenu();
+	 	});
+	});
 };
 
 //Initialize SQL connection and call Main Menu to start
