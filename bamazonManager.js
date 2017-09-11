@@ -55,7 +55,57 @@ var listProdsMgr = function(){
 
 var viewLowInventory = function(){
 	bamazon.listProducts("low", connection, mainMenu);	
-}
+};
+
+var updateInventory = function(){
+	bamazon.listProducts("mgr", connection, function(){
+		inquirer.prompt([
+  	  {
+    		type: "input",
+    		message: "Please Enter the Product ID of the item to update:",
+    		name: "product"
+    	},
+    	{
+    		type: "input",
+    		message: "Please enter the total amount of inventory available: ",
+    		name: "totalInventory"
+    	}
+		]).then(function(res){
+			var prod = parseInt(res.product);
+			var quant = parseInt(res.totalInventory);
+			var prodIndex = bamazon.productList.findIndex(x => x.prodId === prod);
+			if(isNaN(res.product)){
+				console.log("You need to enter a Product Number.  Please try again.");
+				mainMenu();
+				return;
+			}else if(isNaN(res.totalInventory)){
+				console.log("You need to enter the total amount as a number.  Please try again.");
+				mainMenu();
+				return;
+			}else if(quant < bamazon.productList[prodIndex].stockQty){
+				inquirer.prompt([
+				  {
+				  	type: "list",
+				  	message: "The quantity entered is less than current stock.",
+				  	choices: ["Update stock quantity", "Add to stock quantity"],
+				  	name: "confirmation"
+				  }
+				]).then(function(result){
+					if(result.confirmation === "Update stock quantity"){
+						var newQuant = {productId: prod, field: "stock_qty", value: quant};
+					}else{
+						var newQuant = {productId: prod, field: "stock_qty", value: bamazon.productList[prodIndex].stockQty + quant};
+					}
+					bamazon.updateProduct(newQuant, connection, mainMenu);	
+				});
+				return;
+			}else{
+				var newQuant = {productId: prod, field: "stock_qty", value: quant};
+				bamazon.updateProduct(newQuant, connection, mainMenu);	
+			}
+		});
+	});
+};
 
 //Initialize SQL connection and call Main Menu to start
 connection.connect(function(err){

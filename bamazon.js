@@ -58,7 +58,6 @@ Bamazon.prototype.updateProduct = function(updateObj, connection, nextFunc){
 			connection.end();			
 			return console.log(err);
 		}
-		console.log("Complete!");
 		nextFunc();
 	});
 };

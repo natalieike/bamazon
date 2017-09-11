@@ -92,6 +92,7 @@ var buyProduct = function(){
 					qtyPurchased: quant,
 					retailPrice: bamazon.productList[prodIndex].retailPrice
 				});
+				console.log("Added to Cart!");
 				bamazon.updateProduct(newQuant, connection, function(){
 					bamazon.updateProduct(newSold, connection, mainMenu);		
 				});
