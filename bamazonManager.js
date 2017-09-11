@@ -53,10 +53,12 @@ var listProdsMgr = function(){
 	bamazon.listProducts("mgr", connection, mainMenu);
 };
 
+//Lists products with 5 items or less in stock
 var viewLowInventory = function(){
 	bamazon.listProducts("low", connection, mainMenu);	
 };
 
+//Updates the inventory count
 var updateInventory = function(){
 	bamazon.listProducts("mgr", connection, function(){
 		inquirer.prompt([
@@ -103,6 +105,61 @@ var updateInventory = function(){
 				var newQuant = {productId: prod, field: "stock_qty", value: quant};
 				bamazon.updateProduct(newQuant, connection, mainMenu);	
 			}
+		});
+	});
+};
+
+//Adds a new product to the databse
+var addNewProduct = function(){
+	bamazon.getDepartments(connection, function(){
+		var departments = [];
+		for (var i = 0; i < bamazon.deptList.length; i++){
+			departments.push(bamazon.deptList[i].deptName);
+		}
+		inquirer.prompt([
+  	  {
+	    	type: "input",
+    		message: "Enter a Product Name",
+    		name: "prodName"
+  	  },
+	    {
+    		type: "input",
+    		message: "Enter a Product Description",
+  	  	name: "prodDescription"
+	    },
+    	{
+    		type: "input",
+    		message: "Enter the Wholesale Price",
+  	  	name: "prodWsp"
+	    },
+    	{
+  	  	type: "input",
+	    	message: "Enter the Retail Price",
+    		name: "prodRetailPrice"
+    	},
+    	{
+  	  	type: "input",
+	    	message: "Enter the Stock Quantity",
+    		name: "prodStockQty"
+    	},
+    	{
+    		type: "list",
+    		message: "Choose the department",
+    		choices: departments,
+    		name: "prodDept"
+    	}
+		]).then(function(res){
+			var deptIndex = bamazon.deptList.findIndex(x => x.deptName === res.prodDept);
+			var deptId = bamazon.deptList[deptIndex].deptId;
+			var newProduct = {
+				prod_name: res.prodName,
+				prod_descr: res.prodDescription,
+				dept_id: deptId,
+				wsp: res.prodWsp,
+				retail_price: res.prodRetailPrice,
+				stock_qty: res.prodStockQty
+			};
+			bamazon.addProduct(newProduct, connection, mainMenu);
 		});
 	});
 };

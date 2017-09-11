@@ -8,6 +8,7 @@ function Bamazon(){
 	}
 
 	this.productList = [];
+	this.deptList = [];
 };
 
 //Pushes products to productList for further reference, outputs product details.
@@ -39,7 +40,7 @@ Bamazon.prototype.listProducts = function(mode, connection, nextFunc){
 				}
 				console.log("-----------------------------");
 			}
-			else if (res[i].stock_qty <= 5){
+			else if (mode === "low" && res[i].stock_qty <= 5){
 				logMainAttributes(res[i]);
 				console.log("------");
 				logAdditionalAttributes(res[i]);
@@ -58,6 +59,34 @@ Bamazon.prototype.updateProduct = function(updateObj, connection, nextFunc){
 			connection.end();			
 			return console.log(err);
 		}
+		nextFunc();
+	});
+};
+
+//Fetches the list of departments
+Bamazon.prototype.getDepartments = function(connection, nextFunc){
+	var that = this;
+	this.deptList = [];
+	connection.query("SELECT * from depts ORDER BY dept_id", function(err, res){
+		for (var i = 0; i < res.length; i++){
+			var dept = {
+				deptId: res[i].dept_id,
+				deptName: res[i].dept_name,
+				deptOverhead: res[i].overhead_costs
+			};
+			that.deptList.push(dept);
+		}
+		nextFunc();
+	});
+};
+
+Bamazon.prototype.addProduct = function(prodObj, connection, nextFunc){
+	connection.query("INSERT INTO products SET ?", prodObj, function(err, res){
+		if(err){
+			connection.end();			
+			return console.log(err);
+		}
+		console.log("Product Added!");
 		nextFunc();
 	});
 };
