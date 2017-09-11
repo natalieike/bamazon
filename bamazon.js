@@ -32,7 +32,7 @@ Bamazon.prototype.listProducts = function(mode, connection, nextFunc){
 				deptName: res[i].dept_name
 			};
 			that.productList.push(product);
-			if (mode != "low"){
+			if (mode != "low" && mode != "supervisor"){
 				logMainAttributes(res[i]);
 				if(mode != "customer"){
 					console.log("------");
