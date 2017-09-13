@@ -104,13 +104,13 @@ If the inventory count entered is more than the stock count, the database is upd
 
 ![Option 3 Success](/images/bamazonManagerOpt3-e.png)
 
-Choosing Option 4 - **Add New Product** - prompts the user for metadata.  If all metadata is valid, the new product is created in the database, and the user is returned to the Main Menu.
+Choosing Option 4 - **Add New Product** - prompts the user for product metadata.  If all metadata is valid, the new product is created in the database, and the user is returned to the Main Menu.
 
 ![Option 4 Prompts](/images/bamazonManagerOpt4-a.png)
 
 ![Option 4 Success](/images/bamazonManagerOpt4-b.png)
 
-Non-numeric choices will display an error and bring the user back to the Main Menu.
+Non-numeric entries for Wholesale Price, Retail Price, or Quantity will display an error and bring the user back to the Main Menu.
 
 ![Option 4 Error - WSP Not a Number](/images/bamazonManagerOpt4-c.png)
 
@@ -122,3 +122,32 @@ Choosing Option 5 - **Exit** - closes the database connection and exits the appl
 
 ![Option 5](/images/bamazonManagerOpt5.png)
 
+## bamazonSupervisor
+
+**To run** at the command line prompt, type:
+```
+node bamazonSupervisor
+```
+No arguments need to be passed.
+
+Upon startup, the Main Menu is shown. A heading appears at the top of the menu to notify the user that they are in the Supervisor view.
+
+![Main Menu](/images/bamazonSupervisorMainMenu.png)
+
+Choosing Option 1 - **View Department Sales Report** - outputs a chart, grouped by Department, that consists of:  Department ID, Department Name, Overhead Costs, Sales in $, and Profit in $.  Sales is calculated based on the retail price multiplied by the quantity sold, for each item in the department.  Profit is calculated by subtracting the Overhead Costs from the Sales.
+
+The user is returned to the Main Menu at the end of the report.
+
+![Sales Report](/images/bamazonSupervisorOpt1.png)
+
+Choosing Option 2 = **Add New Department** - prompts the user for department metadata.  If all metadata is valid, the new product is created in the database, and the user is returned to the Main Menu. 
+
+![Option 2 - Success](/images/bamazonSupervisorOpt2-b.png)
+
+Non-numeric entries for Overhead Costs will display an error and bring the user back to the Main Menu.
+
+![Option 2 - Error](/images/bamazonSupervisorOpt2-a.png)
+
+Choosing Option 3 - **Exit** - closes the database connection and exits the application.
+
+![Option 3](/images/bamazonSupervisorOpt3.png)
