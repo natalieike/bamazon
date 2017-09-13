@@ -17,8 +17,8 @@ This command-line application suite is composed of three applications:
 ## bamazonCustomer
 
 **To run:** 
-'''
+```
 Node bamazonCustomer
-'''
+```
 No arguments need to be passed.
 
