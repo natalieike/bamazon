@@ -88,35 +88,35 @@ Choosing Option 2 - **View Low Inventory** - will list the enhanced metadata for
 
 Choosing Option 3 - **Update Inventory Count** - lists the enhanced metadata for each product, and then prompts the user for a selection.
 
-![Option 3 Prompt](/images/bamazonCustomerOpt3-a.png)
+![Option 3 Prompt](/images/bamazonManagerOpt3-a.png)
 
 Non-numeric choices will display an error and bring the user back to the Main Menu.
 
-![Option 3 Error - enter a Product Number](/images/bamazonCustomerOpt3-b.png)
+![Option 3 Error - enter a Product Number](/images/bamazonManagerOpt3-b.png)
 
-![Option 3 Error - enter Quantity as a Number](/images/bamazonCustomerOpt3-c.png)
+![Option 3 Error - enter Quantity as a Number](/images/bamazonManagerOpt3-c.png)
 
 The user is prompted for the total amount of inventory, but if the user enters a number that is less than what is currently in stock, they are promtped for whether they intend to update the stock total to this number, or add this to the current stock.
 
-![Option 3 Prompt - entry is less than inventory number](/images/bamazonCustomerOpt3-d.png)
+![Option 3 Prompt - entry is less than inventory number](/images/bamazonManagerOpt3-d.png)
 
 If the inventory count entered is more than the stock count, the database is updated with no further prompts, and the user is returned to the Main Menu.
 
-![Option 3 Success](/images/bamazonCustomerOpt3-e.png)
+![Option 3 Success](/images/bamazonManagerOpt3-e.png)
 
 Choosing Option 4 - **Add New Product** - prompts the user for metadata.  If all metadata is valid, the new product is created in the database, and the user is returned to the Main Menu.
 
-![Option 4 Prompts](/images/bamazonCustomerOpt4-a.png)
+![Option 4 Prompts](/images/bamazonManagerOpt4-a.png)
 
-![Option 4 Success](/images/bamazonCustomerOpt4-b.png)
+![Option 4 Success](/images/bamazonManagerOpt4-b.png)
 
 Non-numeric choices will display an error and bring the user back to the Main Menu.
 
-![Option 4 Error - WSP Not a Number](/images/bamazonCustomerOpt4-c.png)
+![Option 4 Error - WSP Not a Number](/images/bamazonManagerOpt4-c.png)
 
-![Option 4 Error - Retail Price Not a Number](/images/bamazonCustomerOpt4-d.png)
+![Option 4 Error - Retail Price Not a Number](/images/bamazonManagerOpt4-d.png)
 
-![Option 4 Error - Quantity Not a Number](/images/bamazonCustomerOpt4-e.png)
+![Option 4 Error - Quantity Not a Number](/images/bamazonManagerOpt4-e.png)
 
 Choosing Option 5 - **Exit** - closes the database connection and exits the application.
 
