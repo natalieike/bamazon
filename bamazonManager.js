@@ -159,7 +159,21 @@ var addNewProduct = function(){
 				retail_price: res.prodRetailPrice,
 				stock_qty: res.prodStockQty
 			};
-			bamazon.addProduct(newProduct, connection, mainMenu);
+			if(isNaN(res.prodWsp)){
+				console.log("Wholesale Price should be in dollars.  Please try again.");
+				mainMenu();
+				return;
+			}else if(isNaN(res.prodRetailPrice)){
+				console.log("Retial Price should be in dollars.  Please try again.");
+				mainMenu();
+				return;
+			}else if(isNaN(res.prodStockQty)){
+				console.log("You need to enter the total amount as a number.  Please try again.");
+				mainMenu();
+				return;
+			}else{	
+				bamazon.addProduct(newProduct, connection, mainMenu);
+			}
 		});
 	});
 };

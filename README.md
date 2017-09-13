@@ -38,7 +38,7 @@ Choosing Option 2 - **Buy Product** - lists the customer-facing metadata for eac
 
 ![Option 2 Prompt](/images/bamazonCustomerOpt2-a.png)
 
-User must enter a Product ID and Quantity.  If there are enough products, the item is added to the cart, adn the Main Menu is again displayed.
+User must enter a Product ID and Quantity.  If there are enough products, the item is added to the cart, and the Main Menu is again displayed.
 
 ![Option 2 Success](/images/bamazonCustomerOpt2-b.png)
 
@@ -59,4 +59,66 @@ Choosing Option 3 - **Checkout** - lists the items in the shopping cart, and dis
 Choosing Option 4 - **Exit** - closes the database connection and exits the application.
 
 ![Option 4](/images/bamazonCustomerOpt4.png)
+
+## bamazonManager
+
+**To run** at the command line prompt, type:
+```
+node bamazonManager
+```
+No arguments need to be passed.
+
+Upon startup, the Main Menu is shown. A heading appears at the top of the menu to notify the user that they are in the Manager view.
+
+![Main Menu](/images/bamazonManagerMainMenu.png)
+
+Choosing Option 1 - **View Products** - will list the enhanced metadata for each product in the database.
+
+![Option 1](/images/bamazonManagerOpt1-a.png)
+
+At the end of the listing, the Main Menu is displayed, prompting for the next action.
+
+![Option 1 Main Menu](/images/bamazonManagerOpt1-b.png)
+
+Choosing Option 2 - **View Low Inventory** - will list the enhanced metadata for products with 5 or less items in stock.  User is then brought back to the Main Menu.
+
+![Option 2](/images/bamazonManagerOpt2-a.png)
+
+![Option 2 Main Menu](/images/bamazonManagerOpt2-b.png)
+
+Choosing Option 3 - **Update Inventory Count** - lists the enhanced metadata for each product, and then prompts the user for a selection.
+
+![Option 3 Prompt](/images/bamazonCustomerOpt3-a.png)
+
+Non-numeric choices will display an error and bring the user back to the Main Menu.
+
+![Option 3 Error - enter a Product Number](/images/bamazonCustomerOpt3-b.png)
+
+![Option 3 Error - enter Quantity as a Number](/images/bamazonCustomerOpt3-c.png)
+
+The user is prompted for the total amount of inventory, but if the user enters a number that is less than what is currently in stock, they are promtped for whether they intend to update the stock total to this number, or add this to the current stock.
+
+![Option 3 Prompt - entry is less than inventory number](/images/bamazonCustomerOpt3-d.png)
+
+If the inventory count entered is more than the stock count, the database is updated with no further prompts, and the user is returned to the Main Menu.
+
+![Option 3 Success](/images/bamazonCustomerOpt3-e.png)
+
+Choosing Option 4 - **Add New Product** - prompts the user for metadata.  If all metadata is valid, the new product is created in the database, and the user is returned to the Main Menu.
+
+![Option 4 Prompts](/images/bamazonCustomerOpt4-a.png)
+
+![Option 4 Success](/images/bamazonCustomerOpt4-b.png)
+
+Non-numeric choices will display an error and bring the user back to the Main Menu.
+
+![Option 4 Error - WSP Not a Number](/images/bamazonCustomerOpt4-c.png)
+
+![Option 4 Error - Retail Price Not a Number](/images/bamazonCustomerOpt4-d.png)
+
+![Option 4 Error - Quantity Not a Number](/images/bamazonCustomerOpt4-e.png)
+
+Choosing Option 5 - **Exit** - closes the database connection and exits the application.
+
+![Option 5](/images/bamazonManagerOpt5.png)
 
