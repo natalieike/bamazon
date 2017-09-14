@@ -140,13 +140,15 @@ The user is returned to the Main Menu at the end of the report.
 
 ![Sales Report](/images/bamazonSupervisorOpt1.png)
 
-Choosing Option 2 = **Add New Department** - prompts the user for department metadata.  If all metadata is valid, the new product is created in the database, and the user is returned to the Main Menu. 
-
-![Option 2 - Success](/images/bamazonSupervisorOpt2-b.png)
+Choosing Option 2 - **Add New Department** - prompts the user for department metadata.  
 
 Non-numeric entries for Overhead Costs will display an error and bring the user back to the Main Menu.
 
 ![Option 2 - Error](/images/bamazonSupervisorOpt2-a.png)
+
+If all metadata is valid, the new product is created in the database, and the user is returned to the Main Menu. 
+
+![Option 2 - Success](/images/bamazonSupervisorOpt2-b.png)
 
 Choosing Option 3 - **Exit** - closes the database connection and exits the application.
 
